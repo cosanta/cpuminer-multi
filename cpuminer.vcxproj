@@ -226,7 +226,6 @@
     <ClCompile Include="algo\luffa.c" />
     <ClCompile Include="algo\lyra2re.c" />
     <ClCompile Include="algo\lyra2rev2.c" />
-    <ClCompile Include="algo\lyra2v3.c" />
     <ClCompile Include="algo\myr-groestl.c" />
     <ClCompile Include="algo\neoscrypt.c" />
     <ClCompile Include="algo\nist5.c" />
@@ -261,6 +260,7 @@
     <ClCompile Include="algo\x16rv2.c" />
     <ClCompile Include="algo\x16s.c" />
     <ClCompile Include="algo\x17.c" />
+    <ClCompile Include="algo\cosa.c" />
     <ClCompile Include="algo\x20r.c" />
     <ClCompile Include="algo\xevan.c" />
     <ClCompile Include="algo\yescrypt.c" />

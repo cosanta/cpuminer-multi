@@ -3,6 +3,7 @@
  * Copyright 2012-2014 pooler
  * Copyright 2014 Lucas Jones
  * Copyright 2014 Tanguy Pruvot
+ * Copyright 2021 Dmitriy Korniychuk (Cosanta core developer)
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the Free
@@ -104,7 +105,6 @@ enum algos {
 	ALGO_LUFFA,       /* Luffa (Joincoin, Doom) */
 	ALGO_LYRA2,       /* Lyra2RE */
 	ALGO_LYRA2REV2,   /* Lyra2REv2 */
-	ALGO_LYRA2V3,     /* Lyra2REv3 (Vertcoin) */
 	ALGO_MYR_GR,      /* Myriad Groestl */
 	ALGO_NIST5,       /* Nist5 */
 	ALGO_PENTABLAKE,  /* Pentablake */
@@ -138,6 +138,7 @@ enum algos {
 	ALGO_X16RV2,      /* X16Rv2 */
 	ALGO_X16S,
 	ALGO_X17,         /* X17 */
+	ALGO_COSA,        /* Cosanta */
 	ALGO_X20R,
 	ALGO_XEVAN,
 	ALGO_YESCRYPT,
@@ -176,7 +177,6 @@ static const char *algo_names[] = {
 	"luffa",
 	"lyra2re",
 	"lyra2rev2",
-	"lyra2v3",
 	"myr-gr",
 	"nist5",
 	"pentablake",
@@ -210,6 +210,7 @@ static const char *algo_names[] = {
 	"x16rv2",
 	"x16s",
 	"x17",
+	"cosa",
 	"x20r",
 	"xevan",
 	"yescrypt",
@@ -345,7 +346,6 @@ Options:\n\
                           luffa        Luffa\n\
                           lyra2re      Lyra2RE\n\
                           lyra2rev2    Lyra2REv2\n\
-                          lyra2v3      Lyra2REv3 (Vertcoin)\n\
                           myr-gr       Myriad-Groestl\n\
                           neoscrypt    NeoScrypt(128, 2, 1)\n\
                           nist5        Nist5\n\
@@ -379,6 +379,7 @@ Options:\n\
                           x16rv2       X16Rv2 (Raven / Trivechain)\n\
                           x16s         X16S (Pigeon)\n\
                           x17          X17\n\
+                          cosa         Cosanta\n\
                           x20r         X20R\n\
                           xevan        Xevan (BitSend)\n\
                           yescrypt     Yescrypt\n\
@@ -1874,7 +1875,6 @@ static void stratum_gen_work(struct stratum_ctx *sctx, struct work *work)
 			case ALGO_KECCAKC:
 			case ALGO_LBRY:
 			case ALGO_LYRA2REV2:
-			case ALGO_LYRA2V3:
 			case ALGO_PHI2:
 			case ALGO_TIMETRAVEL:
 			case ALGO_BITCORE:
@@ -2212,7 +2212,6 @@ static void *miner_thread(void *userdata)
 			case ALGO_ALLIUM:
 			case ALGO_LYRA2:
 			case ALGO_LYRA2REV2:
-			case ALGO_LYRA2V3:
 			case ALGO_PHI1612:
 			case ALGO_PHI2:
 			case ALGO_TIMETRAVEL:
@@ -2243,6 +2242,7 @@ static void *miner_thread(void *userdata)
 			case ALGO_X16RV2:
 			case ALGO_X16S:
 			case ALGO_X17:
+			case ALGO_COSA:
 			case ALGO_X20R:
 			case ALGO_ZR5:
 				max64 = 0x1ffff;
@@ -2352,9 +2352,6 @@ static void *miner_thread(void *userdata)
 		case ALGO_LYRA2REV2:
 			rc = scanhash_lyra2rev2(thr_id, &work, max_nonce, &hashes_done);
 			break;
-		case ALGO_LYRA2V3:
-			rc = scanhash_lyra2v3(thr_id, &work, max_nonce, &hashes_done);
-			break;
 		case ALGO_MYR_GR:
 			rc = scanhash_myriad(thr_id, &work, max_nonce, &hashes_done);
 			break;
@@ -2463,6 +2460,9 @@ static void *miner_thread(void *userdata)
 			break;
 		case ALGO_X17:
 			rc = scanhash_x17(thr_id, &work, max_nonce, &hashes_done);
+			break;
+		case ALGO_COSA:
+			rc = scanhash_cosa(thr_id, &work, max_nonce, &hashes_done);
 			break;
 		case ALGO_XEVAN:
 			rc = scanhash_xevan(thr_id, &work, max_nonce, &hashes_done);
@@ -2999,8 +2999,6 @@ void parse_arg(int key, char *arg)
 				i = opt_algo = ALGO_LYRA2;
 			else if (!strcasecmp("lyra2v2", arg))
 				i = opt_algo = ALGO_LYRA2REV2;
-			else if (!strcasecmp("lyra2rev3", arg))
-				i = opt_algo = ALGO_LYRA2V3;
 			else if (!strcasecmp("monero", arg))
 				i = opt_algo = ALGO_CRYPTONIGHT;
 			else if (!strcasecmp("phi", arg))
@@ -3448,8 +3446,9 @@ static int thread_create(struct thr_info *thr, void* func)
 
 static void show_credits()
 {
-	printf("** " PACKAGE_NAME " " PACKAGE_VERSION " by tpruvot@github **\n");
-	printf("BTC donation address: 1FhDPLPpw18X4srecguG3MxJYe4a1JsZnd (tpruvot)\n\n");
+	printf("** " PACKAGE_NAME " " PACKAGE_VERSION " with Cosanta miner **\n");
+	printf("BTC  donation address: 1FhDPLPpw18X4srecguG3MxJYe4a1JsZnd (tpruvot)\n\n");
+	printf("COSA donation address: CNFqvvWcixskAeDem6grJECFXvfMmrHC27 (Cosanta)\n\n");
 }
 
 void get_defconfig_path(char *out, size_t bufsize, char *argv0);

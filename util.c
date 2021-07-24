@@ -2395,9 +2395,6 @@ void print_hash_tests(void)
 	lyra2rev2_hash(&hash[0], &buf[0]);
 	printpfx("lyra2v2", hash);
 
-	lyra2v3_hash(&hash[0], &buf[0]);
-	printpfx("lyra2v3", hash);
-
 	cryptonight_hash(&hash[0], &buf[0]);
 	printpfx("monero", hash);
 
@@ -2511,6 +2508,9 @@ void print_hash_tests(void)
 
 	x17hash(&hash[0], &buf[0]);
 	printpfx("x17", hash);
+
+	cosahash(&hash[0], &buf[0]);
+	printpfx("cosa", hash);
 
 	x20r_hash(&hash[0], &buf[0]);
 	printpfx("x20r", hash);

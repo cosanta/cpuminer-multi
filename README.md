@@ -16,6 +16,7 @@ fork of [pooler](//github.com/pooler)'s cpuminer (see AUTHORS for list of contri
 * [Donations](#donations)
 * [Credits](#credits)
 * [License](#license)
+* [Cosanta](#cosanta)
 
 Algorithms
 ==========
@@ -74,6 +75,7 @@ Algorithms
  * ✓ __x20r__
  * ✓ __yescrypt__ (GlobalBoostY [BSTY], Unitus [UIS], MyriadCoin [MYR])
  * ✓ __zr5__ (Ziftrcoin [ZRC])
+ * ✓ __cosa__ (Cosanta [COSA])
 
 #### Implemented, but untested
  * ? hefty1 (Heavycoin)
@@ -200,6 +202,9 @@ Lucas Jones :
 * MRO: `472haywQKoxFzf7asaQ4XKBc2foAY4ezk8HiN63ifW4iAbJiLnfmJfhHSR9XmVKw2WYPnszJV9MEHj9Z5WMK9VCNHaGLDmJ`
 * BTC: `139QWoktddChHsZMWZFxmBva4FM96X2dhE`
 
+Dmitriy Korniychuk :
+* COSA: `CNFqvvWcixskAeDem6grJECFXvfMmrHC27`
+
 Credits
 =======
 CPUMiner-multi was forked from pooler's CPUMiner, and has been started by Lucas Jones.
@@ -209,3 +214,7 @@ CPUMiner-multi was forked from pooler's CPUMiner, and has been started by Lucas 
 License
 =======
 GPLv2.  See COPYING for details.
+
+Cosanta
+=======
+`./cpuminer -a cosa -o http://127.0.0.1:9606  -O user:pass --coinbase-addr=CNFqvvWcixskAeDem6grJECFXvfMmrHC27 --no-redirect --no-stratum   --no-longpoll`

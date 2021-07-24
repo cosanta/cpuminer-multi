@@ -26,7 +26,6 @@ cpuminer_SOURCES = \
   sha3/sph_bmw.c \
   sha3/sph_jh.c \
   sha3/sph_shavite.c \
-  sha3/sph_blake.c \
   sha3/mod_blakecoin.c \
   sha3/sph_luffa.c \
   sha3/sph_cubehash.c \
@@ -54,7 +53,7 @@ cpuminer_SOURCES = \
   crypto/c_skein.c \
   crypto/hash.c \
   crypto/aesb.c \
-  lyra2/Lyra2.c lyra2/Sponge.c \
+  lyra2/Lyra2.c lyra2/Sponge.c lyra2/Lyra2Z.c lyra2/blake.c\
   yescrypt/yescrypt-common.c yescrypt/yescrypt-best.c \
   yescrypt/sha256_Y.c \
   algo/allium.c \
@@ -79,7 +78,6 @@ cpuminer_SOURCES = \
   algo/luffa.c \
   algo/lyra2re.c \
   algo/lyra2rev2.c \
-  algo/lyra2v3.c \
   algo/myr-groestl.c \
   algo/keccak.c \
   algo/pentablake.c \
@@ -115,6 +113,7 @@ cpuminer_SOURCES = \
   algo/x16s.c \
   algo/x20r.c \
   algo/x17.c \
+  algo/cosa.c \
   algo/xevan.c \
   algo/yescrypt.c \
   algo/zr5.c
