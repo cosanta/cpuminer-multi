@@ -1088,7 +1088,7 @@ static int share_result(int result, struct work *work, const char *reason)
 	}
 
 	if (opt_showdiff)
-		sprintf(suppl, "diff %.3f", sharediff);
+		sprintf(suppl, "diff %.5f", sharediff);
 	else // accepted percent
 		sprintf(suppl, "%.2f%%", 100. * accepted_count / (accepted_count + rejected_count));
 
